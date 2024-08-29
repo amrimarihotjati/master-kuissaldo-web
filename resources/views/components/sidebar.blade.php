@@ -20,6 +20,10 @@
                 <li class="{{ Request::is('home') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ url('home') }}"><i class="fas fa-fire"></i><span>Dashboard</span></a>
                 </li>
+                <li class="menu-header">Website</li>
+                <li class="{{ Request::is('landingPageDashboard') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('landingPageDashboard') }}"><i class="fas fa-fire"></i><span>Landing Page</span></a>
+                </li>
                 @if (Auth::user()->role == 'superadmin')
                     <li class="menu-header">Hak Akses</li>
                     <li class="{{ Request::is('hakakses') ? 'active' : '' }}">
