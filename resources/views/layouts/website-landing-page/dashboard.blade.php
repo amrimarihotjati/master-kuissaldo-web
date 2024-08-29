@@ -4,9 +4,11 @@
 
 @section('content')
     <div class="main-content">
-        <div class="card rounded rounded-4 border-0 p-2 shadow">
+        <div class="card rounded rounded-4 border-0 p-4 shadow">
             <div class="card-header text-dark fw-bold d-flex justify-content-between align-items-center mt-2">
                 <div class="h3 fw-bold">Landing Page</div>
+                <button type="button" class="btn btn-primary fw-bold no-shadow rounded rounded-1"
+                    data-bs-toggle="modal" data-bs-target="#createLandingPage"><i class="fas fa-plus"></i></button>
             </div>
             <div class="card-body">
                 <div class="table-responsive vh-100">
@@ -16,6 +18,7 @@
                                 <th class="align-middle text-center">#</th>
                                 <th class="align-middle">Website</th>
                                 <th class="align-middle text-center">Theme</th>
+                                <th class="align-middle text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -24,7 +27,7 @@
                 </div>
             </div>
         </div>
-
+        @include('layouts.website-landing-page.modal.create-new-landing')
     </div>
 @endsection
 
@@ -52,13 +55,18 @@
                 {
                     data: 'name',
                     name: 'name',
-                    width: '80%',
+                    width: '70%',
                     orderable: true,
                     searchable: true,
                     render: function(data, type, full, meta) {
-                        var landingName = '<span class="fw-bold h6">' + full.name + '</span>';
-                        var landingDomain = '<a class="fw-semibold text-primary" href="' + full.domain +'" target="_blank">' + full.domain + '</a>';
-                        return landingName + '</br>' + landingDomain + '</br>';
+                        var faviconUrl = 'https://' + full.domain + '/favicon.ico';
+                        return '<div class="d-flex align-items-center">' +
+                        '<img src="' + faviconUrl + '" alt="" class="img-fluid img-thumbnail mt-1 mb-1" style="width:45px; height:45px; margin-right:10px;" onerror="this.style.display=\'none\'; this.previousSibling.style.display=\'block\';">' +
+                        '<div>' +
+                        '<h5 class="fw-semibold mt-2 mb-0">' + full.name + '</h5>' +
+                        '<a class="fw-semibold text-primary link-underline link-underline-opacity-0" href="' + full.domain + '" target="_blank">' + full.domain + '</a>' +
+                        '</div>' +
+                        '</div>';
                     }
                 },
                 {
@@ -73,6 +81,21 @@
                             .theme + '; display: inline-block; vertical-align: middle;"></span>';
                         return '<div class="d-flex align-items-center justify-content-center" style="height: 100%;">' +
                             landingColorTheme + '</div>';
+                    }
+                },
+                {
+                    data: null,
+                    name: null,
+                    width: '10%',
+                    orderable: false,
+                    searchable: false,
+                    className: 'align-middle',
+                    render: function(data, type, full, meta) {
+                        var iconEdit = '<i class="fa fa-edit"></i>';
+                        var actionEdit =
+                            '<a class="btn btn-secondary" href="/get-detail-landing-page/' + full.id + '">' + iconEdit + '</a>';
+                        return '<div class="d-flex align-items-center justify-content-center" style="height: 100%;">' +
+                            actionEdit + '</div>';
                     }
                 }
             ],

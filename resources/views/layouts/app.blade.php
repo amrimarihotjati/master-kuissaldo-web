@@ -44,5 +44,6 @@
 
     <script src="https:////cdn.datatables.net/2.1.2/js/dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.1.2/js/dataTables.bootstrap5.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
